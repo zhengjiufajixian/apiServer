@@ -1,0 +1,18 @@
+{
+    "token_secret": "awhfeiwhfihfo",
+    "mysql_host": "127.0.0.1",
+    "mysql_database": "app",
+    "mysql_user": "admin",
+    "mysql_password": "",
+    "mysql_read_only_host_1": "127.0.0.1",
+    "redisdb_host": "127.0.0.1",
+    "redisdb_port": "6379",
+    "email_password": "******",
+    "zto_req_host": "",
+    "zto_req_partner": "",
+    "zto_req_pass": "",
+    "pxx_api_key": "",
+    "pxx_api_id": "",
+    "wechat_appid": "",
+    "wechat_app_secret": ""
+}

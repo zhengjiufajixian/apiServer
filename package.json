@@ -1,0 +1,27 @@
+{
+	"name": "apiserver",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon ./bin/start.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"clone": "^2.1.2",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"kue": "^0.11.6",
+		"maxmind": "^4.1.4",
+		"moment": "^2.29.0",
+		"mysql": "^2.18.1",
+		"random-js": "^2.1.0",
+		"uuid": "^8.3.0",
+		"validator": "^13.1.17"
+	},
+	"devDependencies": {
+		"eslint": "^7.9.0"
+	}
+}
