@@ -10,7 +10,7 @@ let config = require('../../../config/sys_config.js');
 let tools = require('../../../library/tools');
 let output_common = require('../../../config/output_common');
 
-let textMessager = require('../../../queue/realtimeQueueHelper/textMessager');
+// let textMessager = require('../../../queue/realtimeQueueHelper/textMessager');
 let checkVerifyCodePolicy = require('../../../library/verifyCodeHelper/checkVerifyCodePolicy').checkVerifyCodePolicy;
 let humanVerifyCheck = require('../../../library/humanVerifyHelper/humanVerifyCheck').humanVerifyCheck;
 
@@ -27,10 +27,10 @@ exports.getPhoneVerifyCode = function (req, res) {
     let code_type;
     let auth_code;
 
-    let verify_message;
+    // let verify_message;
     let verify_code;
     let user_basic_row;
-    let ready_to_send = false;
+    // let ready_to_send = false;
 
     new Promise(function (onFulfilled, onRejected) {
         client_type = req.headers['client-type'];
@@ -62,7 +62,7 @@ exports.getPhoneVerifyCode = function (req, res) {
                     code_type: code_type
                 };
 
-                checkVerifyCodePolicy(options, function (error, result) {
+                checkVerifyCodePolicy(options, function (error) {
                     if (error) {
                         res.json(error);
                         return onRejected();
@@ -74,7 +74,7 @@ exports.getPhoneVerifyCode = function (req, res) {
         // verify auth_code
         .then(function onFulfilled() {
             return new Promise(function (onFulfilled, onRejected) {
-                humanVerifyCheck(auth_code, function (error, result) {
+                humanVerifyCheck(auth_code, function (error) {
                     if (error) {
                         res.json(error);
                         return onRejected(error);
@@ -88,21 +88,21 @@ exports.getPhoneVerifyCode = function (req, res) {
             return new Promise(function (onFulfilled) {
                 verify_code = tools.getRandomInt(config.verify_code_length);
 
-                if (String(code_type) === String(config.verify_code_type_phone_register)) {
-                    verify_message = '【河马印】验证码' + verify_code + '。您正在进行用户注册, 请勿向任何人泄露您的验证码。【河马印】';
-                }
-                if (String(code_type) === String(config.verify_code_type_phone_edit_phone)) {
-                    verify_message = '【河马印】 验证码' + verify_code + '。您正在进行手机号绑定, 请勿向任何人泄露您的验证码。【河马印】';
-                }
-                if (String(code_type) === String(config.verify_code_type_phone_reset_password)) {
-                    verify_message = '【河马印】验证码' + verify_code + '。您正在进行密码修改, 请勿向任何人泄露您的验证码。【河马印】';
-                }
-                if (String(code_type) === String(config.verify_code_type_phone_temp_register)) {
-                    verify_message = '【河马印】验证码' + verify_code + '。您正在进行临时注册, 请勿向任何人泄露您的验证码。【河马印】';
-                }
-                if (String(code_type) === String(config.verify_code_type_phone_verify_code_login)) {
-                    verify_message = '【河马印】验证码' + verify_code + '。您正在进行登录, 请勿向任何人泄露您的验证码。【河马印】';
-                }
+                // if (String(code_type) === String(config.verify_code_type_phone_register)) {
+                //     verify_message = '【河马印】验证码' + verify_code + '。您正在进行用户注册, 请勿向任何人泄露您的验证码。【河马印】';
+                // }
+                // if (String(code_type) === String(config.verify_code_type_phone_edit_phone)) {
+                //     verify_message = '【河马印】 验证码' + verify_code + '。您正在进行手机号绑定, 请勿向任何人泄露您的验证码。【河马印】';
+                // }
+                // if (String(code_type) === String(config.verify_code_type_phone_reset_password)) {
+                //     verify_message = '【河马印】验证码' + verify_code + '。您正在进行密码修改, 请勿向任何人泄露您的验证码。【河马印】';
+                // }
+                // if (String(code_type) === String(config.verify_code_type_phone_temp_register)) {
+                //     verify_message = '【河马印】验证码' + verify_code + '。您正在进行临时注册, 请勿向任何人泄露您的验证码。【河马印】';
+                // }
+                // if (String(code_type) === String(config.verify_code_type_phone_verify_code_login)) {
+                //     verify_message = '【河马印】验证码' + verify_code + '。您正在进行登录, 请勿向任何人泄露您的验证码。【河马印】';
+                // }
                 onFulfilled();
             });
         })
@@ -135,7 +135,7 @@ exports.getPhoneVerifyCode = function (req, res) {
                         res.json(output_common.AUTH_GETPHONEVERIFYCODE_PHONE_ALREADY_REG);
                         return onRejected(output_common.AUTH_GETPHONEVERIFYCODE_PHONE_ALREADY_REG);
                     } else {
-                        ready_to_send = true;
+                        // ready_to_send = true;
                     }
                 }
 
@@ -143,7 +143,7 @@ exports.getPhoneVerifyCode = function (req, res) {
                 if (String(code_type) === String(config.verify_code_type_phone_reset_password)
                     || String(code_type) === String(config.verify_code_type_phone_verify_code_login)) {
                     if (user_basic_row) {
-                        ready_to_send = true;
+                        // ready_to_send = true;
                     } else {
                         res.json(output_common.AUTH_GETPHONEVERIFYCODE_PHONE_NO_EXIST);
                         return onRejected(output_common.AUTH_GETPHONEVERIFYCODE_PHONE_NO_EXIST);
